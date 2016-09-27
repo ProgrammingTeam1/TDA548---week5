@@ -22,6 +22,18 @@ public class Man {
             " \\\n",
     };
 
+    public Man(){
+        nParts = 0;
+    }
+
+    public void addPart(){
+        nParts++;
+    }
+    public boolean isFull(){
+        return nParts == parts.length;
+    }
+
+
     public String toString(){
 
         StringBuilder sb = new StringBuilder();

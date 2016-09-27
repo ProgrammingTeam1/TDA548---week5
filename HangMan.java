@@ -58,30 +58,47 @@ public class HangMan {
         // TODO
         // Create a Man and a Secret
 
-        Secret sr= new Secret(words);
-
+        Secret secret= new Secret(words);
+        Man man = new Man();
 
         // TODO
         // The logical skeleton here
 
+        print(man, secret);
+
+
+        while (result == null){
+
+            if (secret.guess(guessCharacter())){
+                if (!secret.hasUnderscore()){
+                    result = Result.WIN;
+                }
+            }
+            else{
+                man.addPart();
+                if (man.isFull()){
+                    result = Result.LOOSE;
+                }
+            }
+            nGuess++;
+
+            print(man, secret);
+
+        }
+        out.println("You "+result+"!");
+        out.println("in "+nGuess+" tries");
     }
 
-    // ---- IO don't belong to classes, put it here ---------------
     private char guessCharacter() {
         out.println("Guess a char > ");
         return sc.nextLine().charAt(0);
     }
 
-    private void plotMask(String mask) {
+    private void print(Man man, Secret secret){
+        out.println(man.toString());
         out.println();
-        for (char ch : mask.toCharArray()) {
-            out.print(ch + " ");
-        }
+        out.println(secret.toString());
         out.println();
     }
 
-    private void plotMan(int nParts) {
-
-
-    }
 }
